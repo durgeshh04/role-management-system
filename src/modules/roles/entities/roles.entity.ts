@@ -7,8 +7,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'users' })
-export class User {
+@Entity({ name: 'roles' })
+export class Roles {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,18 +17,6 @@ export class User {
 
   @Column({ type: 'varchar', length: 100 })
   name: string;
-
-  @Column({ type: 'varchar', length: 255, unique: true })
-  email: string;
-
-  @Column({ type: 'varchar', length: 20 })
-  password: string;
-
-  @Column({ type: 'varchar', length: 15 })
-  mobile: string;
-
-  @Column({ type: 'simple-array', nullable: true })
-  photos: string[];
 
   @Column({ type: 'varchar', length: 20, default: 'Inactive' })
   status: string;
