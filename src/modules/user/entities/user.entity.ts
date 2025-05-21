@@ -1,8 +1,11 @@
+import { Roles } from 'src/modules/roles/entities/roles.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -21,11 +24,18 @@ export class User {
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar' })
   password: string;
 
   @Column({ type: 'varchar', length: 15 })
   mobile: string;
+
+  @Column({ nullable: true })
+  roleId: number;
+
+  @ManyToOne(() => Roles, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'roleId' })
+  role?: Roles;
 
   @Column({ type: 'simple-array', nullable: true })
   photos: string[];
