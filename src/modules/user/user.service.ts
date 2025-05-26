@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { UserRepository } from './repositories/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private readonly userRepo: Repository<User>,
-  ) {}
+  constructor(private readonly userRepo: UserRepository) {}
   async findUserById(id: number): Promise<any> {
     const userData = await this.userRepo.findOne({
       where: { id: id },
@@ -27,5 +26,10 @@ export class UserService {
     });
 
     return userData ?? 'user data not found';
+  }
+
+  async findAllUser(): Promise<User[]> {
+    const userData = await this.userRepo.findAllUser();
+    return userData;
   }
 }

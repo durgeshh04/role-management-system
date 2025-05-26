@@ -13,7 +13,16 @@ async function bootstrap() {
     .setTitle('Employee Management System')
     .setDescription('API documentation for the Employee management system')
     .setVersion('1.0')
-    .addBearerAuth() // optional: for JWT
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
+      'access-token', // This is the name of the security scheme
+    ) // optional: for JWT
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

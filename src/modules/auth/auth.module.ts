@@ -11,7 +11,7 @@ import { Roles } from '../roles/entities/roles.entity';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: process.env.ExpiresIn },
+      signOptions: { expiresIn: process.env.ExpiresIn || '1h' },
     }),
     TypeOrmModule.forFeature([User, Roles]),
   ],
