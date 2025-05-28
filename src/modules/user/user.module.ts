@@ -5,20 +5,10 @@ import { AuthModule } from '../auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
-import { DataSource } from 'typeorm';
 
 @Module({
   controllers: [UserController],
-  providers: [
-    UserService,
-    {
-      provide: UserRepository,
-      useFactory: (dataSource) => {
-        return new UserRepository(dataSource);
-      },
-      inject: [DataSource],
-    },
-  ],
+  providers: [UserService, UserRepository],
   imports: [TypeOrmModule.forFeature([User]), AuthModule],
 })
 export class UserModule {}
